@@ -5,8 +5,8 @@ This project aims to represent the wire mesh of a map in isometric 3D.
 
 ## Expected Result
 
-## Minilibx
-This project use the "minilibx" library.  
+## MinilibX
+This project use the "MinilibX" library.  
 The installation process include the compilation from sources, the linking and the creation of the static library.
 
 Some external packages can be necessary, depending on your OS: https://github.com/42Paris/minilibx-linux  
