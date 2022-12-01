@@ -1,0 +1,173 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    fdf.txt                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fdagbert <fdagbert@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/11/30 22:45:00 by fdagbert          #+#    #+#              #
+#    Updated: 2020/12/03 16:15:00 by fdagbert         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+*** INSTALL ***
+
+-> Go to the FdF folder and execute the command "make".
+
+
+*** USAGE ***
+
+ ./fdf test_maps/42.fdf
+
+-> The file path must be standard as following: folder/filename.format
+-> The ".fdf" format is NOT mandatory.
+-> Only one map can be opened by an instance (see Tips).
+
+
+*** OPTIONS USAGE ***
+
+ ./fdf -h [test_maps/42.fdf]
+ 
+ ./fdf [-v] [-z] [-r1] test_maps/42.fdf
+
+
+*** OPTIONS HELP ***
+
+[ ]| Optional
+   |	Means that the argument is facultative for usage.
+   | Warning
+   |	Each option must be activated only one time. 
+   |    They can be used in any order and combined together.
+   | Examples
+   |	./fdf test_maps/42.fdf -v
+   |	./fdf -v test_maps/42.fdf
+   |	./fdf test_maps/42.fdf -vz -r2
+   |	./fdf -vr2 test_maps/42.fdf -z
+
+-h | Help
+   |	Print install + usage + options description + controls + tips.
+   | Warning
+   |	Using this option will automatically quit the program without to display the map.
+
+-v | Verbose
+   |	Print with contextualized colors the different steps and principal values.
+   |	Helpfull for debugging or educational explanations.
+
+-z | auto-Zoom
+   |	Disable the automated zoom at starting.
+   | Warning
+   |    Automated zoom is enabled by default.
+   |    It reduces the size of the map to fit into the screen.
+   |	auto-Zoom and auto-Resolution are two independants functionalities.
+
+-r | auto-Resolution
+   |	Force the resolution of the screen at starting.
+   | Tips
+   |	You must specify a number corresponding to the following resolution :
+   |	   r1 -> 720 * 480 pixels   - SD. 
+   |	   r2 -> 800 * 600 pixels   - Standard 4/3. 
+   |	   r3 -> 1280 * 720 pixels  - HD.
+   |	   r4 -> 1920 * 1080 pixels - Full HD.
+   |	   r5 -> 3840 * 2160 pixels - 4K.
+   | Example
+   |	./fdf -r5 test_maps/42.fdf
+   | Warning
+   |	Force the resolution will disable the automated resolution at starting.
+   |	-r0, -r6, -r7, -r8, -r9 has no effect. Others values will result by an error.
+   |	auto-Resolution and auto-Zoom are two independants functionalities.
+
+
+*** KEYBOARD CONTROLS ***
+
+H		| hide the HUD.
+
+SPACE		| enable hidden-face.
+
+CTRL LEFT	| switch projection between:
+		| 1. Isometric (Axonometric)
+		| 2. Cabinet (Oblique)
+		| 3. Perspective (1-point).
+
+PAGE UP 	| zoom the map.
+
+PAGE DOWN	| unzoom the map.
+
+START		| increase the height of the map.
+
+END		| decrease the height of the map.
+
+ARROW UP	| translate the map by X axis.
+
+ARROW DOWN	| translate the map by -X axis (reverse).
+
+ARROW RIGHT	| translate the map by Y axis.
+
+ARROW LEFT	| translate the map by -Y axis (reverse).
+
+Z		| rotate the map by X axis.
+
+S		| rotate the map by -X axis (reverse).
+
+D		| rotate the map by Y axis.
+
+Q		| rotate the map by -Y axis (reverse).
+
+E		| rotate the map by Z axis.
+
+A		| rotate the map by -Z axis (reverse).
+
+DEL		| reset parameters to default.
+
+ESC		| quit properly the program.
+
+
+*** MOUSE CONTROLS ***
+
+LEFT   BUTTON (HOLD)   | rotate the map.
+
+RIGHT  BUTTON (HOLD)   | translate the map.
+
+MIDDLE BUTTON (SCROLL) | zoom the map.
+
+-> Note that multiple buttons press is WELL managed.
+
+
+*** TIPS ***
+
+- Mac OS install (keyboard fix) :
+	Before to compile, remove all the Linux masks and replace with '0' to make the keyboard work properly.
+		Then compile normally the program with the command "make".
+		See "mlx_hook" below for more details.
+	Example for MacOs :
+		mlx_hook(conf->win_ptr, 0, 0, ft_press_key, conf);
+
+- mlx_hook :
+	Example for Linux :
+		mlx_hook(conf->win_ptr, KeyPress, KeyPressMask, ft_press_key, conf);
+	Linux masks used :
+		KeyPress (2)       , KeyPressMask (1L<<0)
+		ButtonPress (4)    , ButtonPressMask (1L<<2)
+		ButtonPress (5)    , ButtonReleaseMask (1L<<3)
+		MotionNotify (6)   , PointerMotionMask (1L<<6)
+		Expose (12)        , ExposureMask (1L<<15)
+		DestroyNotify (17) , StructureNotifyMask (1L<<17)
+	For additional Linux masks, see :
+		X11/Xlib.h
+		http://refspecs.linuxfoundation.org/LSB_1.3.0/gLSB/gLSB/libx11-ddefs.html
+
+- mlx_get_data_addr :
+	bpp    = bits per pixels
+	size_l = nb bytes used to store one line in memory
+	endian = little endian (0) or big endian (1)
+
+- Invalid or missing numbers in the maps are converted to 0.
+
+- The name of the file is displayed in the title of the window.
+
+- The map is automatically placed in the center of the window.
+
+- Split your terminal and start a new fdf instance to visualize various map at the same time.
+
+- Press "[CMD] + [C]" in the terminal to force quit in case of emergency.
+
+- For other issue or additionnal request, please contact the support team (see "auteur" file).
