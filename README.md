@@ -54,6 +54,11 @@ make fclean
 I recommand to use the "clang" compiler because "gcc" generates linking error with the minilibx.  
 Check that clang compiler is installed on your system.
 
+If there is permission issue:
+```
+chmod 774 lib/minilibx-linux/configure
+```
+
 ## Keywords
 Simple graphics library  
 Plot of segments  
